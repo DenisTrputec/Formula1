@@ -11,7 +11,8 @@ class Scraper:
     def __init__(self, url: str):
         self.url = url
         self.data = []
-        self.gp_id = int(url.split('/')[-3]) - 1105
+        self.gp_id = int(url.split('/')[-3])
+        self.session_no = None
         self.__get_data()
 
     def __get_data(self):
@@ -28,6 +29,9 @@ class Scraper:
             self.get_race_results(rows)
         elif "qualifying" in self.url:
             self.get_qualifying_results(rows)
+        elif "practice" in self.url:
+            self.get_practice_results(rows)
+            self.session_no = abs(int(re.findall("-\d", self.url)[-1]))
 
     def get_race_results(self, rows):
         for row in rows[1:]:
@@ -73,6 +77,26 @@ class Scraper:
             print(driver)
             self.data.append(driver)
 
+    def get_practice_results(self, rows):
+        for row in rows[1:]:
+            raw_data = (list(row))
+            driver = defaultdict(None)
+            for i, line in enumerate(raw_data):
+                if i == 3:
+                    driver["Pos"] = self.__extract(line)
+                elif i == 5:
+                    driver["No"] = self.__extract(line)
+                elif i == 7:
+                    driver["Driver"] = self.__extract_driver(line)
+                elif i == 9:
+                    driver["Team"] = self.__extract_team(line)
+                elif i == 11:
+                    driver["Time"] = self.__extract_time(line)
+                elif i == 15:
+                    driver["Laps"] = self.__extract(line)
+            print(driver)
+            self.data.append(driver)
+
     @staticmethod
     def __extract(line):
         return re.findall('>.*<', str(line))[0][1:-1]
@@ -104,13 +128,35 @@ class Scraper:
         if user_input == "Yes":
             db = Database(path)
             if "race-result" in self.url:
-                db.insert_race_results(self.data, self.gp_id)
+                db.insert_race(self.data, db.gp_id[self.gp_id])
             elif "qualifying" in self.url:
-                db.insert_qualifying(self.data, self.gp_id)
+                db.insert_qualifying(self.data, db.gp_id[self.gp_id])
+            elif "practice" in self.url:
+                db.insert_practice(self.data, db.gp_id[self.gp_id], self.session_no)
             print("Database updated!")
 
 
 if __name__ == '__main__':
+    # Bahrain
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-1.html")
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-2.html")
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-3.html")
+
+    # Saudi Arabia
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-1.html")
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-2.html")
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-3.html")
+
+
+    # Australia
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-1.html")
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-2.html")
+    scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-3.html")
     # scr = Scrapper("https://www.formula1.com/en/results.html/2022/races/1108/australia/qualifying.html")
-    scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/race-result.html")
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/race-result.html")
+
+
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1109/italy/practice-1.html")
+    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1109/italy/qualifying.html")
+
     scr.update_database("db/f1.db")
