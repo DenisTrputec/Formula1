@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 import re
+import json
 from collections import defaultdict
 
 from database import Database
@@ -137,26 +138,7 @@ class Scraper:
 
 
 if __name__ == '__main__':
-    # Bahrain
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-1.html")
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-2.html")
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-3.html")
-
-    # Saudi Arabia
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-1.html")
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-2.html")
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-3.html")
-
-
-    # Australia
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-1.html")
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-2.html")
-    scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-3.html")
-    # scr = Scrapper("https://www.formula1.com/en/results.html/2022/races/1108/australia/qualifying.html")
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1108/australia/race-result.html")
-
-
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1109/italy/practice-1.html")
-    # scr = Scraper("https://www.formula1.com/en/results.html/2022/races/1109/italy/qualifying.html")
+    session_link = json.load(open('db/links.json'))
+    scr = Scraper(session_link['Emilia-Romagna']['Qualifying'])
 
     scr.update_database("db/f1.db")

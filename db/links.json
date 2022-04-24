@@ -1,0 +1,34 @@
+{
+	"Bahrain":
+	{
+		"Practice 1": "https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-1.html",
+		"Practice 2": "https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-2.html",
+		"Practice 3": "https://www.formula1.com/en/results.html/2022/races/1124/bahrain/practice-3.html",
+		"Qualifying": "https://www.formula1.com/en/results.html/2022/races/1124/bahrain/qualifying.html",
+		"Race": "https://www.formula1.com/en/results.html/2022/races/1124/bahrain/race-result.html"
+	},
+	"Saudi Arabia":
+	{
+		"Practice 1": "https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-1.html",
+		"Practice 2": "https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-2.html",
+		"Practice 3": "https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/practice-3.html",
+		"Qualifying": "https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/qualifying.html",
+		"Race": "https://www.formula1.com/en/results.html/2022/races/1125/saudi-arabia/race-result.html"
+	},
+	"Australia":
+	{
+		"Practice 1": "https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-1.html",
+		"Practice 2": "https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-2.html",
+		"Practice 3": "https://www.formula1.com/en/results.html/2022/races/1108/australia/practice-3.html",
+		"Qualifying": "https://www.formula1.com/en/results.html/2022/races/1108/australia/qualifying.html",
+		"Race": "https://www.formula1.com/en/results.html/2022/races/1108/australia/race-result.html"
+	},
+	"Emilia-Romagna":
+	{
+		"Practice 1": "https://www.formula1.com/en/results.html/2022/races/1109/italy/practice-1.html",
+		"Qualifying": "https://www.formula1.com/en/results.html/2022/races/1109/italy/qualifying.html",
+		"Practice 2": "https://www.formula1.com/en/results.html/2022/races/1109/italy/practice-2.html",
+		"Sprint": "https://www.formula1.com/en/results.html/2022/races/1109/italy/sprint-results.html",
+		"Race": "https://www.formula1.com/en/results.html/2022/races/1109/italy/race-result.html"
+	}
+}
