@@ -26,7 +26,7 @@ class Scraper:
         table = soup.find(lambda tag: tag.name == 'table')
         rows = table.findAll(lambda tag: tag.name == 'tr')
 
-        if "race-result" in self.url:
+        if "race-result" in self.url or "sprint-results" in self.url:
             self.get_race_results(rows)
         elif "qualifying" in self.url:
             self.get_qualifying_results(rows)
@@ -134,11 +134,13 @@ class Scraper:
                 db.insert_qualifying(self.data, db.gp_id[self.gp_id])
             elif "practice" in self.url:
                 db.insert_practice(self.data, db.gp_id[self.gp_id], self.session_no)
+            elif "sprint-results" in self.url:
+                db.insert_sprint(self.data, db.gp_id[self.gp_id])
             print("Database updated!")
 
 
 if __name__ == '__main__':
     session_link = json.load(open('db/links.json'))
-    scr = Scraper(session_link['Emilia-Romagna']['Qualifying'])
+    scr = Scraper(session_link['Emilia-Romagna']['Sprint'])
 
     scr.update_database("db/f1.db")

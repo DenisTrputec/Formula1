@@ -40,6 +40,14 @@ class Database:
             self.__cursor.execute(query, (gp_id, session_no, driver_id, team_id, d["Pos"], d["Time"], d["Laps"]))
         self.__connection.commit()
 
+    def insert_sprint(self, data, gp_id):
+        query = "INSERT INTO sprint (grand_prix_id,driver_id,team_id,position,laps,time,points) VALUES (?,?,?,?,?,?,?)"
+        for d in data:
+            driver_id = self.__driver_id[int(d["No"])]
+            team_id = self.__team_id[d["Team"]]
+            self.__cursor.execute(query, (gp_id, driver_id, team_id, d["Pos"], d["Laps"], d["Time"], d["Pts"]))
+        self.__connection.commit()
+
 
 if __name__ == '__main__':
     db = Database("db/f2.db")
