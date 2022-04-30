@@ -141,6 +141,6 @@ class Scraper:
 
 if __name__ == '__main__':
     session_link = json.load(open('db/links.json'))
-    scr = Scraper(session_link['Emilia-Romagna']['Sprint'])
+    scr = Scraper(session_link['Emilia-Romagna']['Race'])
 
     scr.update_database("db/f1.db")
